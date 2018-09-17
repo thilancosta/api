@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.example.com/webservice"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:ws="http://www.example.com/webservice"
+                  xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+        <xs:schema targetNamespace="http://www.example.com/webservice">
+            <xs:element name="GetCompanyDetailsInput">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ROCNo" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="CompanyDetails">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ROCNo" type="xs:string"/>
+                        <xs:element name="name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="GetCompanyDetailsOutput">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="ws:CompanyDetails"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="Header">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="1" name="Username" type="xs:string"/>
+                        <xs:element minOccurs="0" maxOccurs="1" name="Password" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="GetCompanyDetailsInput">
+        <wsdl:part name="Header" element="ws:Header"/>
+        <wsdl:part name="GetCompanyDetails" element="ws:GetCompanyDetailsInput"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetCompanyDetailsOutput">
+        <wsdl:part name="Body" element="ws:GetCompanyDetailsOutput"/>
+    </wsdl:message>
+
+    <wsdl:portType name="CompanyDetailsSoap">
+        <wsdl:operation name="GetCompanyDetails">
+            <wsdl:input message="ws:GetCompanyDetailsInput"/>
+            <wsdl:output message="ws:GetCompanyDetailsOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="CompanyDetailsSoap" type="ws:CompanyDetailsSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+
+        <wsdl:operation name="GetCompanyDetails">
+            <soap:operation soapAction="http://www.example.com/webservice/GetCompanyDetails" style="document"/>
+            <wsdl:input>
+                <soap:body parts="GetCompanyDetails" use="literal"/>
+                <soap:header message="ws:GetCompanyDetailsInput" part="Header" use="literal"></soap:header>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+    <wsdl:service name="CompanyDetailsService">
+        <wsdl:documentation>
+
+        </wsdl:documentation>
+        <wsdl:port name="CompanyDetailsServiceSOAP" binding="ws:CompanyDetailsSoap">
+            <soap:address location="app/ApiFiles/server.php"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
