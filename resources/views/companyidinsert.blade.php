@@ -96,11 +96,44 @@
                 <div class="row">
                     <div class="col-md-8 offset-2">
                         <div class="form-group">
-                            @if(!empty($companyname))
-                                <label for="company_id"><b>Company Name</b></label>
-                                {{ $companyname }}
+                            @if(!empty($company))
+                                <label for="company_id"><b>Company Details</b></label>
+                                <br>
+                                <b>
+                                {{ $company->name }}
+                                    <br>
+                                {{ $company->type_id }}
+                                    <br>
+                                    {{ $company->email }}
+                                </b>
                             @else
                                 <label for="company_id"><b>Company Name</b></label>
+                                @endif
+                                <br>
+                                <br>
+                                @if(!empty($companydirectors))
+                                    <label for="company_id"><b>Company Directors</b></label>
+                                    <br>
+                                    <b>@foreach($companydirectors as $companydirector)
+                                            {{ $companydirector->title  }}
+                                        {{ $companydirector->first_name }}
+                                        <br>
+                                            {{ "nic:-" }}
+                                        {{ $companydirector->nic }}
+                                        <br>
+                                            {{ $companydirector->passport_issued_country }}
+                                        <br>
+                                            {{ $companydirector->dob }}
+                                            <br>
+
+                                            {{ $addressarrays->$companydirector->address_id }}
+
+                                        <br><br>
+
+                                        @endforeach
+                                    </b>
+                                @else
+                                    <label for="company_id"><b>Company Name</b></label>
                                 @endif
                         </div>
                     </div>

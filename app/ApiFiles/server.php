@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '../../vendor/autoload.php';
 
+
 class Hello
 {
     /**
@@ -15,8 +16,7 @@ class Hello
     }
 
 }
-
-$serverUrl = "http://localhost/hello/server.php";
+$serverUrl = url("http://127.0.0.1:8000/hello/server.php");
 $options = [
     'uri' => $serverUrl,
 ];

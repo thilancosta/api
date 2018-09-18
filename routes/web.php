@@ -11,9 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('companyidinsert');
-//});
 Route::prefix( '/admin/' )->group( function () {
     Route::get( 'viewform', 'AdminController@viewform' )->name( 'admin-viewform' );
     Route::get( 'getcompanydetails', 'AdminController@getcompanydetails' )->name( 'admin-getcompanydetails' );
