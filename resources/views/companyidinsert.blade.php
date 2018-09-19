@@ -105,15 +105,25 @@
                                 {{ $company->type_id }}
                                     <br>
                                     {{ $company->email }}
+                                    <br>
+                                    {{ $company->created_at }}
+                                    <br>
+                                    {{ $address->province }}
+                                    <br>
+                                    {{ $address->district }}
+                                    <br>
+
+                                    {{ $address->address1 }}{{ $address->address2 }}{{ $address->city }}
                                 </b>
                             @else
-                                <label for="company_id"><b>Company Name</b></label>
+                                <label for="company_name"><b>Company Name</b></label>
                                 @endif
                                 <br>
                                 <br>
                                 @if(!empty($companydirectors))
-                                    <label for="company_id"><b>Company Directors</b></label>
+                                    <label for="company_dir"><b>Company Directors</b></label>
                                     <br>
+                                <br>
                                     <b>@foreach($companydirectors as $companydirector)
                                             {{ $companydirector->title  }}
                                         {{ $companydirector->first_name }}
@@ -126,14 +136,20 @@
                                             {{ $companydirector->dob }}
                                             <br>
 
-                                            {{ $addressarrays->$companydirector->address_id }}
+                                            {{ $addressarrays[$companydirector->address_id]->address1 }}{{ $addressarrays[$companydirector->address_id]->address2 }}{{ $addressarrays[$companydirector->address_id]->city }}
 
+                                            <br>
+                                            {{ $companydirector->mobile }}
+                                            <br>
+                                            {{ $companydirector->telephone }}
+                                            <br>
+                                            {{ $companydirector->email }}
                                         <br><br>
 
                                         @endforeach
                                     </b>
                                 @else
-                                    <label for="company_id"><b>Company Name</b></label>
+                                    <label for="company_dir"><b>Company Directors</b></label>
                                 @endif
                         </div>
                     </div>

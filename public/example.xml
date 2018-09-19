@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompanyRegistrationDetailsMessage><Header><username>username</username><password>password</password><checksum>20180834</checksum></Header><SendRegisteredCompanyFile><MainDetails><ROCNumber/><Salutation/><CompanyName/><CompanyType/><DateOfIncorporation/></MainDetails></SendRegisteredCompanyFile></CompanyRegistrationDetailsMessage>
