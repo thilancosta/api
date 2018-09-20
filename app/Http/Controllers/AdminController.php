@@ -69,13 +69,13 @@ class AdminController extends Controller
                     $Salutation = $xml->createElement("Salutation");
                     $maindetails->appendChild($Salutation);
 
-                    $CompanyName = $xml->createElement("CompanyName");
+                    $CompanyName = $xml->createElement("CompanyName",$company->name);
                     $maindetails->appendChild($CompanyName);
 
-                    $CompanyType = $xml->createElement("CompanyType");
+                    $CompanyType = $xml->createElement("CompanyType",$company->type_id);
                     $maindetails->appendChild($CompanyType);
 
-                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation");
+                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation",$company->created_at);
                     $maindetails->appendChild($DateOfIncorporation);
 
                     $DateofCommencement = $xml->createElement("DateofCommencement");
@@ -147,13 +147,13 @@ class AdminController extends Controller
                 $Address = $xml->createElement("Address");
                 $SendRegisteredCompanyFile->appendChild($Address);
 
-                    $RegisteredAddress = $xml->createElement("RegisteredAddress");
+                    $RegisteredAddress = $xml->createElement("RegisteredAddress",$address->address1 ." ". $address->address2 ." ". $address->city);
                     $Address->appendChild($RegisteredAddress);
 
-                    $Province = $xml->createElement("Province");
+                    $Province = $xml->createElement("Province",$address->province);
                     $Address->appendChild($Province);
 
-                    $District = $xml->createElement("District");
+                    $District = $xml->createElement("District",$address->district);
                     $Address->appendChild($District);
 
                     $DivisionalSecretariat = $xml->createElement("DivisionalSecretariat");
@@ -174,7 +174,7 @@ class AdminController extends Controller
                     $Fax = $xml->createElement("Fax");
                     $Contact->appendChild($Fax);
 
-                    $EmailAddress = $xml->createElement("EmailAddress");
+                    $EmailAddress = $xml->createElement("EmailAddress",$company->email);
                     $Contact->appendChild($EmailAddress);
 
                     $ContactPersonName = $xml->createElement("ContactPersonName");
@@ -183,50 +183,53 @@ class AdminController extends Controller
                 $DirectorList = $xml->createElement("DirectorList");
                 $SendRegisteredCompanyFile->appendChild($DirectorList);
 
-                    $Director = $xml->createElement("Director");
-                    $DirectorList->appendChild($Director);
+                $i = 0;
+                    foreach($companydirectors as $companydirector) {
 
-                        $DirectorReferenceType = $xml->createElement("DirectorReferenceType");
-                        $Director->appendChild($DirectorReferenceType);
+                        $i = $i + 1;
+                        $Director = $xml->createElement("Director");
+                        $DirectorList->appendChild($Director);
 
-                        $DirectorReferenceNumber = $xml->createElement("DirectorReferenceNumber");
-                        $Director->appendChild($DirectorReferenceNumber);
+                            $DirectorReferenceType = $xml->createElement("DirectorReferenceType","NIC");
+                            $Director->appendChild($DirectorReferenceType);
 
-                        $DirectorName = $xml->createElement("DirectorName");
-                        $Director->appendChild($DirectorName);
+                            $DirectorReferenceNumber = $xml->createElement("DirectorReferenceNumber",$companydirector->nic);
+                            $Director->appendChild($DirectorReferenceNumber);
 
-                        $DirectorName = $xml->createElement("DirectorName");
-                        $Director->appendChild($DirectorName);
+                            $DirectorName = $xml->createElement("DirectorName",$companydirector->first_name." ".$companydirector->last_name);
+                            $Director->appendChild($DirectorName);
 
-                        $Salutation = $xml->createElement("Salutation");
-                        $Director->appendChild($Salutation);
+                            $Salutation = $xml->createElement("Salutation",$companydirector->title);
+                            $Director->appendChild($Salutation);
 
-                        $IssuanceCountryOfPassport = $xml->createElement("IssuanceCountryOfPassport");
-                        $Director->appendChild($IssuanceCountryOfPassport);
+                            $IssuanceCountryOfPassport = $xml->createElement("IssuanceCountryOfPassport",$companydirector->passport_issued_country);
+                            $Director->appendChild($IssuanceCountryOfPassport);
 
-                        $DateOfBirth = $xml->createElement("DateOfBirth");
-                        $Director->appendChild($DateOfBirth);
+                            $DateOfBirth = $xml->createElement("DateOfBirth",$companydirector->dob);
+                            $Director->appendChild($DateOfBirth);
 
-                        $DirectorAddress = $xml->createElement("DirectorAddress");
-                        $Director->appendChild($DirectorAddress);
+                            $DirectorAddress = $xml->createElement("DirectorAddress",$addressarrays[$companydirector->address_id]->address1." ".$addressarrays[$companydirector->address_id]->address2." ".$addressarrays[$companydirector->address_id]->city);
+                            $Director->appendChild($DirectorAddress);
 
-                    $DirectorContact = $xml->createElement("DirectorContact");
-                    $DirectorList->appendChild($DirectorContact);
+                            $DirectorContact = $xml->createElement("DirectorContact");
+                            $Director->appendChild($DirectorContact);
 
-                        $Mobile = $xml->createElement("Mobile");
-                        $DirectorContact->appendChild($Mobile);
+                                $Mobile = $xml->createElement("Mobile",$companydirector->mobile);
+                                $DirectorContact->appendChild($Mobile);
 
-                        $Office = $xml->createElement("Office");
-                        $DirectorContact->appendChild($Office);
+                                $Office = $xml->createElement("Office",$companydirector->telephone);
+                                $DirectorContact->appendChild($Office);
 
-                        $Fax = $xml->createElement("Fax");
-                        $DirectorContact->appendChild($Fax);
+                                $Fax = $xml->createElement("Fax");
+                                $DirectorContact->appendChild($Fax);
 
-                        $EmailAddress = $xml->createElement("EmailAddress");
-                        $DirectorContact->appendChild($EmailAddress);
+                                $EmailAddress = $xml->createElement("EmailAddress",$companydirector->email);
+                                $DirectorContact->appendChild($EmailAddress);
 
-                        $ContactPersonName = $xml->createElement("ContactPersonName");
-                        $DirectorContact->appendChild($ContactPersonName);
+                                $ContactPersonName = $xml->createElement("ContactPersonName");
+                                $DirectorContact->appendChild($ContactPersonName);
+
+                    }
 
         $xml->FormatOutput = true;
         $xml->saveXML();
