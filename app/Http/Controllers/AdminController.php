@@ -69,25 +69,170 @@ class AdminController extends Controller
                     $Salutation = $xml->createElement("Salutation");
                     $maindetails->appendChild($Salutation);
 
-        $CompanyName = $xml->createElement("CompanyName");
-        $maindetails->appendChild($CompanyName);
+                    $CompanyName = $xml->createElement("CompanyName");
+                    $maindetails->appendChild($CompanyName);
 
-        $CompanyType = $xml->createElement("CompanyType");
-        $maindetails->appendChild($CompanyType);
+                    $CompanyType = $xml->createElement("CompanyType");
+                    $maindetails->appendChild($CompanyType);
 
-        $DateOfIncorporation = $xml->createElement("DateOfIncorporation");
-        $maindetails->appendChild($DateOfIncorporation);
+                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation");
+                    $maindetails->appendChild($DateOfIncorporation);
 
-        $DateofCommencement = $xml->createElement("DateofCommencement");
-        $maindetails->appendChild($DateofCommencement);
+                    $DateofCommencement = $xml->createElement("DateofCommencement");
+                    $maindetails->appendChild($DateofCommencement);
+
+                    $BAC = $xml->createElement("BAC");
+                    $maindetails->appendChild($BAC);
+
+                    $PreferredLanguage = $xml->createElement("PreferredLanguage");
+                    $maindetails->appendChild($PreferredLanguage);
+
+                    $PreferredModeOfCommunication = $xml->createElement("PreferredModeOfCommunication");
+                    $maindetails->appendChild($PreferredModeOfCommunication);
+
+                    $BOIRegistered = $xml->createElement("BOIRegistered");
+                    $maindetails->appendChild($BOIRegistered);
+
+                    $BOIStartDate = $xml->createElement("BOIStartDate");
+                    $maindetails->appendChild($BOIStartDate);
+
+                    $BOIEndDate = $xml->createElement("BOIEndDate");
+                    $maindetails->appendChild($BOIEndDate);
+
+                    $PurposeOfRegistration = $xml->createElement("PurposeOfRegistration");
+                    $maindetails->appendChild($PurposeOfRegistration);
+
+                    $OtherPurposeOfRegistration = $xml->createElement("OtherPurposeOfRegistration");
+                    $maindetails->appendChild($OtherPurposeOfRegistration);
+
+                    $OtherPurposeOfRegistration = $xml->createElement("OtherPurposeOfRegistration");
+                    $maindetails->appendChild($OtherPurposeOfRegistration);
+
+                $ForeignCompany = $xml->createElement("ForeignCompany");
+                $SendRegisteredCompanyFile->appendChild($ForeignCompany);
+
+                    $DateofIncorporation = $xml->createElement("DateofIncorporation");
+                    $ForeignCompany->appendChild($DateofIncorporation);
+
+                    $CountryOfOrigin = $xml->createElement("CountryOfOrigin");
+                    $ForeignCompany->appendChild($CountryOfOrigin);
+
+                $GroupOfCompanies = $xml->createElement("GroupOfCompanies");
+                $SendRegisteredCompanyFile->appendChild($GroupOfCompanies);
+
+                    $ParentCompanyExists = $xml->createElement("ParentCompanyExists");
+                    $GroupOfCompanies->appendChild($ParentCompanyExists);
+
+                    $LocalParentCompany = $xml->createElement("LocalParentCompany");
+                    $GroupOfCompanies->appendChild($LocalParentCompany);
+
+                    $ParentCompanyReference = $xml->createElement("ParentCompanyReference");
+                    $GroupOfCompanies->appendChild($ParentCompanyReference);
+
+                    $ParentCompanyReferenceID = $xml->createElement("ParentCompanyReferenceID");
+                    $GroupOfCompanies->appendChild($ParentCompanyReferenceID);
+
+                    $ParentCompanyName = $xml->createElement("ParentCompanyName");
+                    $GroupOfCompanies->appendChild($ParentCompanyName);
+
+                    $ParentCompanyAddress = $xml->createElement("ParentCompanyAddress");
+                    $GroupOfCompanies->appendChild($ParentCompanyAddress);
+
+                    $CountryOfIncorporation = $xml->createElement("CountryOfIncorporation");
+                    $GroupOfCompanies->appendChild($CountryOfIncorporation);
+
+                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation");
+                    $GroupOfCompanies->appendChild($DateOfIncorporation);
+
+                $Address = $xml->createElement("Address");
+                $SendRegisteredCompanyFile->appendChild($Address);
+
+                    $RegisteredAddress = $xml->createElement("RegisteredAddress");
+                    $Address->appendChild($RegisteredAddress);
+
+                    $Province = $xml->createElement("Province");
+                    $Address->appendChild($Province);
+
+                    $District = $xml->createElement("District");
+                    $Address->appendChild($District);
+
+                    $DivisionalSecretariat = $xml->createElement("DivisionalSecretariat");
+                    $Address->appendChild($DivisionalSecretariat);
+
+                    $GramaNiladhariDivisions = $xml->createElement("GramaNiladhariDivisions");
+                    $Address->appendChild($GramaNiladhariDivisions);
+
+                $Contact = $xml->createElement("Contact");
+                $SendRegisteredCompanyFile->appendChild($Contact);
+
+                    $Mobile = $xml->createElement("Mobile");
+                    $Contact->appendChild($Mobile);
+
+                    $Office = $xml->createElement("Office");
+                    $Contact->appendChild($Office);
+
+                    $Fax = $xml->createElement("Fax");
+                    $Contact->appendChild($Fax);
+
+                    $EmailAddress = $xml->createElement("EmailAddress");
+                    $Contact->appendChild($EmailAddress);
+
+                    $ContactPersonName = $xml->createElement("ContactPersonName");
+                    $Contact->appendChild($ContactPersonName);
+
+                $DirectorList = $xml->createElement("DirectorList");
+                $SendRegisteredCompanyFile->appendChild($DirectorList);
+
+                    $Director = $xml->createElement("Director");
+                    $DirectorList->appendChild($Director);
+
+                        $DirectorReferenceType = $xml->createElement("DirectorReferenceType");
+                        $Director->appendChild($DirectorReferenceType);
+
+                        $DirectorReferenceNumber = $xml->createElement("DirectorReferenceNumber");
+                        $Director->appendChild($DirectorReferenceNumber);
+
+                        $DirectorName = $xml->createElement("DirectorName");
+                        $Director->appendChild($DirectorName);
+
+                        $DirectorName = $xml->createElement("DirectorName");
+                        $Director->appendChild($DirectorName);
+
+                        $Salutation = $xml->createElement("Salutation");
+                        $Director->appendChild($Salutation);
+
+                        $IssuanceCountryOfPassport = $xml->createElement("IssuanceCountryOfPassport");
+                        $Director->appendChild($IssuanceCountryOfPassport);
+
+                        $DateOfBirth = $xml->createElement("DateOfBirth");
+                        $Director->appendChild($DateOfBirth);
+
+                        $DirectorAddress = $xml->createElement("DirectorAddress");
+                        $Director->appendChild($DirectorAddress);
+
+                    $DirectorContact = $xml->createElement("DirectorContact");
+                    $DirectorList->appendChild($DirectorContact);
+
+                        $Mobile = $xml->createElement("Mobile");
+                        $DirectorContact->appendChild($Mobile);
+
+                        $Office = $xml->createElement("Office");
+                        $DirectorContact->appendChild($Office);
+
+                        $Fax = $xml->createElement("Fax");
+                        $DirectorContact->appendChild($Fax);
+
+                        $EmailAddress = $xml->createElement("EmailAddress");
+                        $DirectorContact->appendChild($EmailAddress);
+
+                        $ContactPersonName = $xml->createElement("ContactPersonName");
+                        $DirectorContact->appendChild($ContactPersonName);
 
         $xml->FormatOutput = true;
         $xml->saveXML();
 
         $xml->save("example.xml");
-        $xml->load("example.xml");
 
-        dd($xml);
 
 
 
