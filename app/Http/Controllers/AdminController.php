@@ -22,24 +22,32 @@ class AdminController extends Controller
         $address = Addresse::where( 'id',$company->address_id )->first();
         $addressarrays=[];
 
-
         foreach ($companydirectors as $companydirector){
             $addresse = Addresse::where( 'id',$companydirector->address_id )->first();
             $addressarrays[$companydirector->address_id] = $addresse;
 
         }
+        
+
+        //Replace & with &amp;
+        if(strrchr($company->name,"&")==false){
+            $companyname = $company->name;
+        }
+        else{
+            $companyname = str_replace('&', '&amp;', $company->name);
+        }
 
 
+        //Incorporation date
         $createDate = new \DateTime($company->created_at);
         $strip = $createDate->format('Y-m-d');
         $num = str_replace('-', '', $strip);
         $incoDate = (int) $num;
-
         $companytypeid = $company->type_id;
-
         $checksum = $incoDate+$companytypeid;
 
 
+        //Creating xml dom
         $xml = new \DOMDocument("1.0","UTF-8");
 
         $container = $xml->createElement("CompanyRegistrationDetailsMessage");
@@ -69,13 +77,13 @@ class AdminController extends Controller
                     $Salutation = $xml->createElement("Salutation");
                     $maindetails->appendChild($Salutation);
 
-                    $CompanyName = $xml->createElement("CompanyName",$company->name);
+                    $CompanyName = $xml->createElement("CompanyName",$companyname);
                     $maindetails->appendChild($CompanyName);
 
                     $CompanyType = $xml->createElement("CompanyType",$company->type_id);
                     $maindetails->appendChild($CompanyType);
 
-                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation",$company->created_at);
+                    $DateOfIncorporation = $xml->createElement("DateOfIncorporation",$strip);
                     $maindetails->appendChild($DateOfIncorporation);
 
                     $DateofCommencement = $xml->createElement("DateofCommencement");
@@ -236,6 +244,7 @@ class AdminController extends Controller
 
         $xml->save("example.xml");
 
+        dd($xml);
 
 
 
